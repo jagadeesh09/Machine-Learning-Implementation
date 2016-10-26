@@ -56,7 +56,15 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
         if gradient_magnitude < tolerance:
             converged = True
     return(weights)
-    
+def get_residual_sum_of_squares(model, data, outcome):
+    # First get the predictions
+    predictions = model.predict(data)
+    # Then compute the residuals/errors
+    residual = predictions-outcome
+    # Then square and add them up
+    sq_residuals = residual * residual
+    RSS = sq_residuals.sum()
+    return(RSS)       
     
 train_data,test_data = sales.random_split(.8,seed=0)
 model_features = ['sqft_living', 'sqft_living15'] # sqft_living15 is the average squarefeet for the nearest 15 neighbors. 
